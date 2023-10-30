@@ -1,7 +1,27 @@
 import { useState, useEffect } from 'react'
-
+import { useLazyGetScoresQuery } from '../services/scores'
 
 const Demo = () => {
+  const [scores, setScores] = useState({
+    league: '',
+    scores: '',
+  });
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    const { data } = await getScores({ scoresLeague:scores.league});
+
+    if(data?.scores){
+      const newScores = { ...scores, league: data.league};
+
+      setScores(newScores);
+
+      console.log(newScores)
+    }
+  }
+
+  const [getScores, { error, isFetching}] = useLazyGetScoresQuery();
   return (
     <div class="container">
         <div class="box">
