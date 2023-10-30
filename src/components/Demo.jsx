@@ -4,7 +4,7 @@ import { useLazyGetScoresQuery } from '../services/league'
 
 const Demo = () => {
   const [leagues, setLeagues] = useState({
-    text: "",
+    url: "",
     scores: "",
   });
   const [allLeagues, setAllLeagues] = useState([])
@@ -27,7 +27,7 @@ const Demo = () => {
     e.preventDefault();
 
     const existingLeagues = allLeagues.find(
-      (item) => item.text === leagues.text
+      (item) => item.url === leagues.url
     );
 
     if (existingLeagues) return setLeagues(existingLeagues)
@@ -37,7 +37,8 @@ const Demo = () => {
       const updatedAllLeagues = [newLeagues, ...allLeagues]
       setLeagues(newLeagues);
       setAllLeagues(updatedAllLeagues);
-      localStorage.setItem("leagues", JSON.stringify(updatedAllLeagues));
+      localStorage.setItem("leagues", JSON.stringify(updatedAllLeagues));}
+    }
 
   return (
     <section >
@@ -74,5 +75,5 @@ const Demo = () => {
     </section>
   );
 };
-  };};
+  
 export default Demo
