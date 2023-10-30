@@ -14,7 +14,8 @@ export const leagueApi = createApi({
     }),
     endpoints: (builder) =>({
         getScores: builder.query({
-            query:(params) => `/v3/fixtures?name=${params.leaguesUrl}&live=all`
+            query:(params) => `/v3/fixtures?live=all&league=${params.leaguesUrl}`
+            
         }),
     }),
 
