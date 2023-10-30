@@ -1,62 +1,78 @@
 import { useState, useEffect } from 'react'
-import { useLazyGetScoresQuery } from '../services/scores'
+import { useLazyGetScoresQuery } from '../services/league'
+
 
 const Demo = () => {
-  const [scores, setScores] = useState({
-    league: '',
-    scores: '',
+  const [leagues, setLeagues] = useState({
+    text: "",
+    scores: "",
   });
+  const [allLeagues, setAllLeagues] = useState([])
 
-  const handleSubmit = async(e) => {
+
+  // RTK lazy query
+  const [getScores] = useLazyGetScoresQuery();
+
+  useEffect(() => {
+    const articlesFromLocalStorage = JSON.parse(
+      localStorage.getItem("leagues")
+    );
+
+    if (articlesFromLocalStorage) {
+      setAllLeagues(articlesFromLocalStorage);
+    }
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data } = await getScores({ scoresLeague:scores.league});
+    const existingLeagues = allLeagues.find(
+      (item) => item.text === leagues.text
+    );
 
-    if(data?.scores){
-      const newScores = { ...scores, league: data.league};
+    if (existingLeagues) return setLeagues(existingLeagues)
+    const { data } = await getScores({ leaguesUrl: leagues.url });
+    if (data?.scores) {
+      const newLeagues = { ...leagues, scores: data.scores };
+      const updatedAllLeagues = [newLeagues, ...allLeagues]
+      setLeagues(newLeagues);
+      setAllLeagues(updatedAllLeagues);
+      localStorage.setItem("leagues", JSON.stringify(updatedAllLeagues));
 
-      setScores(newScores);
-
-      console.log(newScores)
-    }
-  }
-
-  const [getScores, { error, isFetching}] = useLazyGetScoresQuery();
   return (
-    <div class="container">
-        <div class="box">
-            <img src="/src/assets/international-international-friendlies.webp" alt="International Friendlies Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/international.html">International Friendlies</a>
-        </div>
-        
-        <div class="box">
-            <img src="src/assets/German-Bundesliga-Logo-2002.png" alt="Bundesliga Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/bundes.html">Bundesliga Matches</a>
-        </div>
-        <div class="box">
-            <img src="src/assets/5842fe06a6515b1e0ad75b3b.png" alt="Champions League Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/eufa.html">Champions League Matches</a>
-        </div>
-        <div class="box">
-            <img src="src/assets/designstudiopremier-league-rebrand-relaunch-logo-design-barclays-football_dezeen_slideshow-a.jpg" alt="English Premeire League Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/premier.html">English Premier League Matches</a>
-        </div>
-        <div class="box">
-            <img src="src/assets/laliga-2023-2024-new3252.logowik.com.webp" alt="LaLiga Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/laliga.html">La Liga Matches</a>
-        </div>
-        <div class="box">
-            <img src="src/assets/MLS_crest_logo_RGB_-_New_England_Revolution.svg.webp" alt="MLS Logo"></img>
-            <br></br>
-            <a href="/frontend/leagues/mls.html">MLS Matches</a>
-        </div> 
-    </div>
-  )
-}
-
+    <section >
+      {/* Search */}
+      <div>
+        <form onSubmit={handleSubmit}>
+         
+          <input
+            type='text'
+            placeholder='Type a league'
+            value={leagues.url}
+            onChange={(e) => setLeagues({...leagues, url: e.target.value })}
+            required
+           />
+          <button type='submit'>
+            <p>↵</p>
+          </button>
+        </form>
+      </div>
+     {/* Display Result */}
+      <div>
+        {leagues.scores && (
+            <div >
+              <h2 >
+                Scoreboard
+              </h2>
+              <div>
+                <p>{leagues.scores}</p>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </section>
+  );
+};
+  };};
 export default Demo

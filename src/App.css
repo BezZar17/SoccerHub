@@ -41,3 +41,14 @@ button{
     height: 200px;
     margin-top: 25px;
 }
+.form{
+    text-align: center;
+    color: white;
+    font-family: 'Courgette', cursive
+}
+
+.section{ 
+    text-align: center;
+    color: white;
+    font-family: 'Courgette', cursive
+}

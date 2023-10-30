@@ -8,7 +8,7 @@ const Hero = () => {
             <button type='button' onClick={() => window.open('')}>Sign Up</button>
         </nav>
         <h1>Today's Matches</h1>
-        <h2>Click on a league to see today's scores</h2>
+        <h2>Type a league to see today's scores</h2>
 
     </header>
   )

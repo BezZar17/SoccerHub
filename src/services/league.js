@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const rapidApiKey = import.meta.env.VITE_RAPID_API_SCORES_KEY
-export const scoresApi = createApi({
-    reducerPath: 'scoresApi',
+const rapidApiKey = import.meta.env.VITE_RAPID_API_SCORES_KEY;
+export const leagueApi = createApi({
+    reducerPath: 'leagueApi',
     BaseQuery: fetchBaseQuery({
         baseUrl: 'https://api-football-v1.p.rapidapi.com/',
         prepareHeaders: (headers) => {
-            headers.set('X-RapidAPI-Key', 'rapidApiKey');
+            headers.set('X-RapidAPI-Key', rapidApiKey);
             headers.set('X-RapidAPI-Host', 'api-football-v1.p.rapidapi.com');
 
             return headers;
@@ -14,10 +14,10 @@ export const scoresApi = createApi({
     }),
     endpoints: (builder) =>({
         getScores: builder.query({
-            query: (params) => `/fixtures?url=${endcodeURIComponents(params.scoresUrl)}`
+            query: (params) => `fixtures?url=${(params.leagueUrl)}`
         })
     })
 
 })
 
-export const { useLazyGetScoresQuery} = scoresApi
+export const { useLazyGetScoresQuery } = leagueApi
