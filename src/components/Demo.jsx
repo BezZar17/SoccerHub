@@ -4,8 +4,8 @@ import { useLazyGetScoresQuery } from '../services/league'
 
 const Demo = () => {
   const [leagues, setLeagues] = useState({
-    url: "",
-    scores: "",
+    url: '',
+    scores: '',
   });
   const [allLeagues, setAllLeagues] = useState([])
 
