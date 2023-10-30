@@ -14,7 +14,7 @@ export const leagueApi = createApi({
     }),
     endpoints: (builder) =>({
         getScores: builder.query({
-            query:(params) => `/leagueTable/{league_id=${params.leaguesUrl}}`
+            query: (params) => `/v3/fixtures?league=${params.leaguesUrl}&season=2023`,
         }),
     }),
 

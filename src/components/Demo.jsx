@@ -30,16 +30,18 @@ const Demo = () => {
       (item) => item.url === leagues.url
     );
 
-    if (existingLeagues) return setLeagues(existingLeagues)
+    if (existingLeagues) return setLeagues(existingLeagues);
     const { data } = await getScores({ leaguesUrl: leagues.url });
     if (data?.scores) {
       const newLeagues = { ...leagues, scores: data.scores };
-      const updatedAllLeagues = [newLeagues, ...allLeagues]
+      const updatedAllLeagues = [newLeagues, ...allLeagues];
+
       setLeagues(newLeagues);
       setAllLeagues(updatedAllLeagues);
-      localStorage.setItem("leagues", JSON.stringify(updatedAllLeagues));}
+      localStorage.setItem("leagues", JSON.stringify(updatedAllLeagues));
     }
-
+    };
+  
   return (
     <section >
       {/* Search */}
@@ -74,6 +76,6 @@ const Demo = () => {
       </div>
     </section>
   );
-};
+      }
   
 export default Demo
