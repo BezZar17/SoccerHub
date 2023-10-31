@@ -41,7 +41,7 @@ button{
     height: 200px;
     margin-top: 25px;
 }
-.form{
+.form .imput{
     background-color: #2d4fd855;
     text-align: center;
     color: white;
@@ -54,6 +54,7 @@ button{
     font-family: 'Courgette', cursive
 }
 
-.div{
-    height: 100px;
+::placeholder{
+    color: #2d4fd855;
+    font-family: 'Courgette', cursive
 }
