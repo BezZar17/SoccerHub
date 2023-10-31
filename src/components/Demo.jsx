@@ -55,12 +55,11 @@ const Demo = () => {
             onChange={(e) => setLeagues({...leagues, url: e.target.value })}
             required
            />
-          <button type='submit'>
-            <p>↵</p>
-          </button>
+        <input type="submit" value="go" id="submit" />
         </form>
+        
       </div>
-     {/* Display Result */}
+     
       <div>
         {leagues.scores && (
             <div >
