@@ -7,16 +7,15 @@ body {
 }
 
 .webName{
-    font-size: 50px;
+    font-size: 100px;
     text-align: center;
     margin: auto;
 }
 
 .form{
     background-color: #2d4fd855;
-    text-align: center;
     color: white;
-    font-family: 'Courgette', cursive
+    font-family: 'Courgette', cursive;
 }
 
 
@@ -25,3 +24,11 @@ body {
     color: #2d4fd855;
     font-family: 'Courgette', cursive
 }
+
+input{
+    font-family: 'Courgette', cursive;
+    color: #2d4fd855
+}
+
+
+

@@ -43,8 +43,7 @@ const Demo = () => {
     };
   
   return (
-    <section >
-      {/* Search */}
+    <container>
       <div>
         <form onSubmit={handleSubmit}>
          
@@ -57,23 +56,8 @@ const Demo = () => {
            />
         <input type="submit" value="go" id="submit" />
         </form>
-        
       </div>
-     
-      <div>
-        {leagues.scores && (
-            <div >
-              <h2 >
-                Scoreboard
-              </h2>
-              <div>
-                <p>{leagues.scores}</p>
-              </div>
-            </div>
-          )
-        }
-      </div>
-    </section>
+    </container>
   );
       }
   
